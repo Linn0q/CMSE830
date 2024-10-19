@@ -2,8 +2,6 @@
 
 # **Video Game Sentiment Analysis and Rating Prediction Based on Steam User Ratings**
 
----
-
 ## **Project Overview**
 This project explores video game ratings and user reviews on **Steam**, focusing on sentiment analysis and rating prediction. The project is built using **Streamlit** and features interactive visualizations, word clouds, and machine learning models.
 
