@@ -39,7 +39,7 @@ elif page == "Data🌈":
     from sklearn.experimental import enable_iterative_imputer  # Enable if using older scikit-learn
     from sklearn.impute import IterativeImputer
 
-    steam1 = pd.read_csv('Steam_2024_bestRevenue_1500.csv')
+    steam1 = pd.read_csv('steam1.csv')
     steam2 = pd.read_csv('steam2.csv')
     steam4 = pd.read_csv('steam4.csv')
     steam5 = pd.read_csv('steam5.csv')
