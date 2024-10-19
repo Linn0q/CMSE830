@@ -73,12 +73,9 @@ This project explores video game ratings and user reviews on **Steam**, focusing
 2. **Multivariate Analysis**: Explore the interactions between variables more deeply.
 3. **App Optimization**: Improve the Streamlit app for better user interaction and performance.
 
-## **Contributing**
-
-Feel free to contribute to this project by submitting a pull request or opening an issue.
-
 ## **Contact**
 
 For any questions or feedback, feel free to contact me at wangj324@msu.edu
 
+Enjoy!
 ---
