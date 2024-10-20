@@ -39,7 +39,7 @@ elif page == "Data🌈":
     from sklearn.experimental import enable_iterative_imputer  # Enable if using older scikit-learn
     from sklearn.impute import IterativeImputer
 
-    steam1 = pd.read_csv('Steam_2024_bestRevenue_1500.csv')
+    steam1 = pd.read_csv('steam1.csv')
     steam2 = pd.read_csv('steam2.csv')
     steam4 = pd.read_csv('steam4.csv')
     steam5 = pd.read_csv('steam5.csv')
@@ -251,7 +251,6 @@ elif page == "WordCloud🌨️":
 
     steam1 = pd.read_csv('steam1.csv')
     steam2 = pd.read_csv('steam2.csv')
-    steam3 = pd.read_csv('steam3.csv', low_memory=False)
     steam4 = pd.read_csv('steam4.csv')
     steam5 = pd.read_csv('steam5.csv')
     s1 = pd.read_csv('s1.csv')
@@ -268,7 +267,7 @@ elif page == "WordCloud🌨️":
 
     st.subheader('Word Cloud of Game Descriptions')
 
-    text = ' '.join(steam3['review'].dropna())
+   # text = ' '.join(steam3['review'].dropna())
 
 
     wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
@@ -349,7 +348,6 @@ elif page == "Analysis🏈":
 
     steam1 = pd.read_csv('steam1.csv')
     steam2 = pd.read_csv('steam2.csv')
-    steam3 = pd.read_csv('steam3.csv', low_memory=False)
     steam4 = pd.read_csv('steam4.csv')
     steam5 = pd.read_csv('steam5.csv')
     s1 = pd.read_csv('s1.csv')
