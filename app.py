@@ -267,18 +267,6 @@ elif page == "WordCloud🌨️":
 
     st.subheader('Word Cloud of Game Descriptions')
 
-   # text = ' '.join(steam3['review'].dropna())
-
-
-    wordcloud = WordCloud(width=800, height=400, background_color='white').generate(text)
-    plt.figure(figsize=(15, 7.5))
-    plt.imshow(wordcloud, interpolation='bilinear')
-    plt.axis('off')
-    plt.title('Word Cloud of Game Descriptions')
-    st.pyplot(plt)
-
-    st.subheader('Word Cloud of Game Tags')
-
 
     all_tags = ' '.join(s1['tags'].dropna())
 
@@ -299,36 +287,6 @@ elif page == "WordCloud🌨️":
     plt.axis("off")
     plt.title('Word Cloud for Game Descriptions')
     st.pyplot(plt)
-
-    st.subheader('Interactive Word Cloud of Game Descriptions')
-
-    words = word_tokenize(text.lower())
-    stop_words = set(stopwords.words('english'))
-    words = [word for word in words if word.isalpha() and word not in stop_words]
-
-    word_counts = Counter(words)
-    common_words = word_counts.most_common(200)
-
-    wordcloud_chart = create_wordcloud(common_words, 'Interactive Word Cloud of Game Descriptions')
-    st_pyecharts(wordcloud_chart)
-
-    st.subheader('Interactive Word Cloud of Game Tags')
-
-    tags = ','.join(s1['tags'].dropna()).split(',')
-    tags = [tag.strip().lower() for tag in tags if tag.strip() != '']
-    tag_counts = Counter(tags)
-    common_tags = tag_counts.most_common(200)
-
-    wordcloud_chart_tags = create_wordcloud(common_tags, 'Interactive Word Cloud of Game Tags')
-    st_pyecharts(wordcloud_chart_tags)
-
-    st.subheader('Interactive Word Cloud for Game Long Descriptions')
-    long_desc_words = word_tokenize(long_desc_text.lower())
-    long_desc_words = [word for word in long_desc_words if word.isalpha() and word not in stop_words]
-    long_desc_word_counts = Counter(long_desc_words)
-    common_long_desc_words = long_desc_word_counts.most_common(200)
-    wordcloud_chart_long_desc = create_wordcloud(common_long_desc_words, 'Interactive Word Cloud for Game Descriptions')
-    st_pyecharts(wordcloud_chart_long_desc)
 
 elif page == "Analysis🏈":
     st.title("Analysis🏈")
