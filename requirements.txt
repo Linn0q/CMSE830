@@ -3,11 +3,13 @@ pandas
 numpy
 matplotlib
 seaborn
-scikit-learn
 plotly
-vaderSentiment
 wordcloud
+vaderSentiment
 nltk
-pyecharts
-imblearn
+scikit-learn
 xgboost
+imbalanced-learn
+scipy
+pyecharts
+streamlit-echarts
