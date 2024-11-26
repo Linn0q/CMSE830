@@ -882,7 +882,7 @@ elif page == "Recommendation🎯":
     if st.sidebar.button("🚀 Get Recommendations"):
         recommend_games_rf(selected_genres, selected_developers, selected_publishers)
 
-elif page == "Conclusion🍩":a
+elif page == "Conclusion🍩":
     st.title("Conclusion🍩")
     st.markdown("*Summary for midterm*🍩")
     st.markdown('**So far, I have completed the following tasks for the project:**')
