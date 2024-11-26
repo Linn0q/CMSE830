@@ -1,15 +1,13 @@
 import streamlit as st
 
-page = st.sidebar.selectbox("Select Page🛗", ["Homepage🎮","Data🌈", "Gallery🌷","WordCloud🌨️","Analysis🏈","Conclusion🍩"])
+page = st.sidebar.selectbox("Select Page🛗", ["Welcome🎮","Data🌈", "EDA🌷","WordCloud🌨️","Models🏈","Recommendation🎯","Conclusion🍩",])
 
-if page == "Homepage🎮":
-    st.title("Homepage🎮")
+if page == "Welcome🎮":
+    st.title("Welcome🎮")
     st.write("")
     st.image("https://steamuserimages-a.akamaihd.net/ugc/922549154591526002/87EFBCBF9BEBF5F42CD6E9DADB9EE0CCB79A6E38/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false", use_column_width=True)
     st.markdown("# Hello!🌈")
     st.markdown("### Welcome to my CMSE-830 project!")
-    #st.markdown(" Do you like games? ")
-    #st.markdown("### Let's Explore Data in Games！")
     st.write("Do you like games? Do you want to explore more about games?")
     st.write("As a game lover, a data science student and someone who worked in game industy, I am always interested in the data behind games. ")
     st.write("Today we have a lot of opportunities to look for games'rating and give comments.")
@@ -50,8 +48,8 @@ elif page == "Data🌈":
     st.dataframe(steam4.head())
     st.dataframe(steam5.head())
 
-elif page == "Gallery🌷":
-    st.title("Gallery🌷")
+elif page == "EDA🌷":
+    st.title("EDA🌷")
     import pandas as pd
     import numpy as np
     import matplotlib.pyplot as plt
@@ -62,13 +60,12 @@ elif page == "Gallery🌷":
     import plotly.figure_factory as ff
     from wordcloud import WordCloud
     from vaderSentiment.vaderSentiment import SentimentIntensityAnalyzer
-    from textblob import TextBlob
+#   from textblob import TextBlob
     from sklearn.impute import SimpleImputer
     import streamlit as st
     # Load datasets
     steam1 = pd.read_csv('steam1.csv')
     steam2 = pd.read_csv('steam2.csv')
-    #steam3 = pd.read_csv('steam3.csv', low_memory=False)
     steam4 = pd.read_csv('steam4.csv')
     steam5 = pd.read_csv('steam5.csv')
     s1 = pd.read_csv('s1.csv')
@@ -233,7 +230,8 @@ elif page == "Gallery🌷":
 
 elif page == "WordCloud🌨️":
     st.title("WordCloud🌨️")
-
+    import plotly.graph_objects as go
+    import plotly.express as px
     import pandas as pd
     import numpy as np
     import matplotlib.pyplot as plt
@@ -255,41 +253,39 @@ elif page == "WordCloud🌨️":
     steam5 = pd.read_csv('steam5.csv')
     s1 = pd.read_csv('s1.csv')
     s2 = pd.read_csv('s2.csv')
+    s3 = pd.read_csv('s3.csv')
 
-  
-    def create_wordcloud(common_words, title):
-        wordcloud = (
-            PyEchartsWordCloud(init_opts=opts.InitOpts(width='800px', height='600px'))
-            .add("", common_words, word_size_range=[20, 100], shape='circle')  
-            .set_global_opts(title_opts=opts.TitleOpts(title=title))
-        )
-        return wordcloud
-
-    st.subheader('Word Cloud of Game Descriptions')
-
-
-    all_tags = ' '.join(s1['tags'].dropna())
-
-    wordcloud = WordCloud(width=800, height=400, background_color='white').generate(all_tags)
-    plt.figure(figsize=(12, 6))
-    plt.imshow(wordcloud, interpolation='bilinear')
-    plt.axis("off")
-    plt.title("Word Cloud of Game Tags")
-    st.pyplot(plt)
-
-    st.subheader('Word Cloud for Game Long Descriptions')
+    all_tags = ' '.join(s1['tags'].dropna()) 
+    wordcloud_tags = WordCloud(width=800, height=400, background_color='white').generate(all_tags)
+    wordcloud_array = np.array(wordcloud_tags)
+    fig = px.imshow(wordcloud_array, title="Word Cloud of Game Tags", binary_string=True)
+    fig.update_xaxes(visible=False)  
+    fig.update_yaxes(visible=False) 
+    fig.update_layout(margin=dict(l=0, r=0, t=30, b=0))  
+    st.plotly_chart(fig)
 
     long_desc_text = ' '.join(s2['long_description'].dropna())
 
-    wordcloud = WordCloud(background_color="white", max_words=200).generate(long_desc_text)
-    plt.figure(figsize=(10, 7))
-    plt.imshow(wordcloud, interpolation='bilinear')
-    plt.axis("off")
-    plt.title('Word Cloud for Game Descriptions')
-    st.pyplot(plt)
+    wordcloud_long_desc = WordCloud(background_color="white", max_words=200).generate(long_desc_text)
+    fig = px.imshow(wordcloud_long_desc, title="Word Cloud for Game Long Descriptions")
+    fig.update_xaxes(visible=False)
+    fig.update_yaxes(visible=False)
+    fig.update_layout(margin=dict(l=0, r=0, t=30, b=0))  
+    st.plotly_chart(fig)
 
-elif page == "Analysis🏈":
-    st.title("Analysis🏈")
+    short_desc_text = ' '.join(s2['short_description'].dropna())
+
+    wordcloud_short_desc = WordCloud(background_color="white", max_words=200).generate(short_desc_text)
+    fig = px.imshow(wordcloud_short_desc, title="Word Cloud for Game Short Descriptions")
+    fig.update_xaxes(visible=False)
+    fig.update_yaxes(visible=False)
+    fig.update_layout(margin=dict(l=0, r=0, t=30, b=0))  
+    st.plotly_chart(fig)
+
+elif page == "Models🏈":
+    st.title("Models🏈")
+    st.write("On this page, we will showcase the training and evaluation results of multiple machine learning models 🤖📊, as well as content-based game recommendations 🎮✨.")
+    st.markdown("## Part1. Data")
 
     import pandas as pd
     import numpy as np
@@ -412,7 +408,481 @@ elif page == "Analysis🏈":
     else:
         st.write("please select one...")
 
-elif page == "Conclusion🍩":
+    import pandas as pd
+    import numpy as np
+    import re
+    from datetime import datetime
+    import ast
+    from collections import Counter
+
+    from sklearn.model_selection import train_test_split
+    from sklearn.preprocessing import LabelEncoder, MultiLabelBinarizer
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from sklearn.metrics import classification_report, accuracy_score
+    from sklearn.svm import LinearSVC
+    from sklearn.ensemble import RandomForestClassifier
+    from sklearn.neighbors import KNeighborsClassifier
+    from sklearn.naive_bayes import MultinomialNB
+    from sklearn.linear_model import LogisticRegression
+    import xgboost as xgb
+    from sklearn.feature_selection import SelectKBest, chi2
+    from imblearn.over_sampling import RandomOverSampler
+    from sklearn.decomposition import TruncatedSVD
+    from sklearn.neighbors import NearestNeighbors
+    from scipy.sparse import hstack
+    import pandas as pd
+    import numpy as np
+    import re
+    from datetime import datetime
+    import ast
+    from collections import Counter
+    from scipy.sparse import hstack
+    from sklearn.feature_selection import SelectKBest, chi2
+    import plotly.express as px
+    import plotly.graph_objects as go
+    from wordcloud import WordCloud
+    from sklearn.metrics import confusion_matrix
+    from sklearn.decomposition import TruncatedSVD
+
+    import warnings
+    warnings.filterwarnings('ignore')
+
+    st.markdown("## Part2. Recommandation System")
+    @st.cache_data
+    def load_and_clean_data_models():
+        dtypes = {
+            'name': 'category',
+            'short_description': 'string',
+            'long_description': 'string',
+            'genres': 'string',
+            'minimum_system_requirement': 'string',
+            'recommend_system_requirement': 'string',
+            'release_date': 'string',
+            'developer': 'string',
+            'publisher': 'string',
+            'overall_player_rating': 'string',
+            'number_of_reviews_from_purchased_people': 'string',
+            'number_of_english_reviews': 'string',
+            'link': 'string'
+        }
+        df_model = pd.read_csv('steam5.csv', dtype=dtypes, low_memory=True)
+
+        def parse_list_field(field):
+            try:
+                return ast.literal_eval(field)
+            except (ValueError, SyntaxError):
+                return []
+
+        df_model['genres'] = df_model['genres'].apply(parse_list_field)
+        df_model['developer'] = df_model['developer'].apply(parse_list_field)
+        df_model['publisher'] = df_model['publisher'].apply(parse_list_field)
+
+        def parse_number_field(x):
+            if pd.isnull(x):
+                return 0
+            x = re.sub(r'[\(\),]', '', x)
+            x = x.replace(',', '')
+            try:
+                return int(x)
+            except ValueError:
+                return 0
+
+        df_model['number_of_reviews_from_purchased_people'] = df_model['number_of_reviews_from_purchased_people'].apply(parse_number_field)
+        df_model['number_of_english_reviews'] = df_model['number_of_english_reviews'].apply(parse_number_field)
+
+        def parse_date(date_str):
+            try:
+                return datetime.strptime(date_str, '%d %b, %Y')
+            except ValueError:
+                try:
+                    return datetime.strptime(date_str, '%b %Y')
+                except ValueError:
+                    return pd.NaT
+
+        df_model['release_date'] = df_model['release_date'].apply(parse_date)
+
+        return df_model
+
+    df_model = load_and_clean_data_models()
+    @st.cache_resource
+    def feature_engineering_and_train_models(df):
+        valid_ratings = [
+            'Overwhelmingly Positive', 'Very Positive', 'Mostly Positive', 'Positive',
+            'Mixed', 'Negative', 'Mostly Negative', 'Very Negative', 'Overwhelmingly Negative'
+        ]
+        df = df[df['overall_player_rating'].isin(valid_ratings)]
+
+        rating_mapping = {
+            'Overwhelmingly Positive': 'Positive',
+            'Very Positive': 'Positive',
+            'Mostly Positive': 'Positive',
+            'Positive': 'Positive',
+            'Mixed': 'Mixed',
+            'Mostly Negative': 'Negative',
+            'Negative': 'Negative',
+            'Very Negative': 'Negative',
+            'Overwhelmingly Negative': 'Negative'
+        }
+
+        df['overall_player_rating'] = df['overall_player_rating'].map(rating_mapping)
+
+        le_rating = LabelEncoder()
+        df['overall_player_rating_encoded'] = le_rating.fit_transform(df['overall_player_rating'])
+
+        df['description'] = df['short_description'].fillna('') + ' ' + df['long_description'].fillna('')
+
+        max_tfidf_features = 5000  
+        tfidf = TfidfVectorizer(max_features=max_tfidf_features, stop_words='english', ngram_range=(1, 2))
+        text_features = tfidf.fit_transform(df['description'])
+
+        mlb = MultiLabelBinarizer()
+        genres_encoded = mlb.fit_transform(df['genres'])
+
+        numeric_features = df[['number_of_reviews_from_purchased_people', 'number_of_english_reviews']].fillna(0)
+
+        final_features = hstack([text_features, genres_encoded, numeric_features])
+
+        X = final_features
+        y = df['overall_player_rating_encoded']
+
+        X_train, X_test, y_train, y_test = train_test_split(
+            X, y, test_size=0.2, random_state=42, stratify=y
+        )
+
+        ros = RandomOverSampler(random_state=42)
+        X_train_resampled, y_train_resampled = ros.fit_resample(X_train, y_train)
+
+        k_best_features = 1000  
+        selector = SelectKBest(chi2, k=k_best_features)
+        X_train_selected = selector.fit_transform(X_train_resampled, y_train_resampled)
+        X_test_selected = selector.transform(X_test)
+
+        models = {
+            'LinearSVC': LinearSVC(max_iter=5000, class_weight='balanced'),
+            'RandomForest': RandomForestClassifier(n_estimators=200, random_state=42, class_weight='balanced', n_jobs=-1),
+            'XGBoost': xgb.XGBClassifier(eval_metric='mlogloss', use_label_encoder=False, n_jobs=-1),
+            'KNN': KNeighborsClassifier(n_neighbors=5, n_jobs=-1),
+            'MultinomialNB': MultinomialNB(),
+            'LogisticRegression': LogisticRegression(max_iter=5000, class_weight='balanced', n_jobs=-1)
+        }
+
+        model_results = {}
+
+        for name, model in models.items():
+            model.fit(X_train_selected, y_train_resampled)
+            y_pred = model.predict(X_test_selected)
+            acc = accuracy_score(y_test, y_pred)
+            report = classification_report(y_test, y_pred, target_names=le_rating.classes_, zero_division=0, output_dict=True)
+            model_results[name] = {
+                'model': model,
+                'accuracy': acc,
+                'report': report
+            }
+
+        svd = TruncatedSVD(n_components=100, random_state=42)
+        features_reduced = svd.fit_transform(X)
+
+        nn_model = NearestNeighbors(n_neighbors=6, algorithm='auto', n_jobs=-1)
+        nn_model.fit(features_reduced)
+
+        return le_rating, tfidf, mlb, X, df, models, model_results, svd, nn_model
+
+    le_rating, tfidf, mlb, X_all, df_all, models, model_results, svd, nn_model = feature_engineering_and_train_models(df_model)
+
+    st.subheader("Model Evaluation Results")
+
+    model_names = list(models.keys())
+    selected_model = st.selectbox("Select A Model: ", model_names)
+
+    if selected_model:
+        st.write(f"**{selected_model} Model Accuracy:{model_results[selected_model]['accuracy']:.4f}**")
+        report_df = pd.DataFrame(model_results[selected_model]['report']).transpose()
+        st.dataframe(report_df)
+        
+    rating_counts = df_model['overall_player_rating'].value_counts()
+
+    fig = px.bar(
+        x=rating_counts.index,
+        y=rating_counts.values,
+        labels={"x": "Player Rating", "y": "Count"},
+        title="Distribution of Player Ratings"
+    )
+    fig.update_layout(xaxis_title="Player Rating", yaxis_title="Count")
+    st.plotly_chart(fig)
+
+
+    all_genres = [genre for sublist in df_model['genres'] for genre in sublist]
+    genres_count = pd.Series(all_genres).value_counts().nlargest(10)
+    fig = px.bar(
+        x=genres_count.index,
+        y=genres_count.values,
+        labels={"x": "Game Genre", "y": "Count"},
+        title="Top 10 Most Popular Game Genres"
+    )
+    fig.update_layout(xaxis_title="Game Genre", yaxis_title="Count")
+    st.plotly_chart(fig)
+
+    df_model['release_year'] = df_model['release_date'].dt.year
+    fig = px.histogram(
+        df_model, 
+        x="release_year", 
+        title="Yearly Game Releases",
+        labels={"release_year": "Year", "count": "Number of Games"},
+        nbins=len(df_model['release_year'].dropna().unique())
+    )
+    fig.update_layout(xaxis_title="Release Year", yaxis_title="Number of Games")
+    st.plotly_chart(fig)
+
+    fig = px.box(
+        df_model,
+        x="overall_player_rating",
+        y="number_of_reviews_from_purchased_people",
+        points="all",
+        title="Number of Reviews by Player Ratings",
+        labels={"overall_player_rating": "Player Rating", "number_of_reviews_from_purchased_people": "Number of Reviews"}
+    )
+    fig.update_layout(yaxis_type="log", xaxis_title="Player Rating", yaxis_title="Number of Reviews (Log Scale)")
+    st.plotly_chart(fig)
+
+    dtypes = {
+        'name': 'category',
+        'short_description': 'string',
+        'long_description': 'string',
+        'genres': 'string',
+        'minimum_system_requirement': 'string',
+        'recommend_system_requirement': 'string',
+        'release_date': 'string',
+        'developer': 'string',
+        'publisher': 'string',
+        'overall_player_rating': 'string',
+        'number_of_reviews_from_purchased_people': 'string',
+        'number_of_english_reviews': 'string',
+        'link': 'string'
+    }
+
+    df_model['description'] = df_model['short_description'].fillna('') + ' ' + df_model['long_description'].fillna('')  
+    text = " ".join(df_model['description'].fillna(""))
+    wordcloud = WordCloud(width=800, height=400, background_color="white").generate(text)
+    fig = px.imshow(wordcloud, title="Word Cloud for Game Descriptions")
+    fig.update_xaxes(visible=False)
+    st.plotly_chart(fig)
+
+elif page == "Recommendation🎯":
+    st.title("Recommendation🎯")
+
+    import pandas as pd
+    import numpy as np
+    import re
+    from datetime import datetime
+    import ast
+    from collections import Counter
+    from scipy.sparse import hstack
+    import streamlit as st
+    from sklearn.model_selection import train_test_split
+    from sklearn.preprocessing import LabelEncoder, MultiLabelBinarizer
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from sklearn.metrics import classification_report
+    from sklearn.ensemble import RandomForestClassifier
+    from sklearn.feature_selection import SelectKBest, chi2
+    from imblearn.over_sampling import RandomOverSampler
+    import warnings
+    warnings.filterwarnings('ignore')
+
+    @st.cache_data
+    def load_and_clean_data():
+        dtypes = {
+            'name': 'category',
+            'short_description': 'string',
+            'long_description': 'string',
+            'genres': 'string',
+            'minimum_system_requirement': 'string',
+            'recommend_system_requirement': 'string',
+            'release_date': 'string',
+            'developer': 'string',
+            'publisher': 'string',
+            'overall_player_rating': 'string',
+            'number_of_reviews_from_purchased_people': 'string',
+            'number_of_english_reviews': 'string',
+            'link': 'string'
+        }
+        df_rec = pd.read_csv('steam5.csv', dtype=dtypes, low_memory=True)
+        return df_rec
+
+    df_rec = load_and_clean_data()
+
+    def clean_data(df):
+        def parse_list_field(field):
+            try:
+                return ast.literal_eval(field)
+            except (ValueError, SyntaxError):
+                return []
+
+        df['genres'] = df['genres'].apply(parse_list_field)
+        df['developer'] = df['developer'].apply(parse_list_field)
+        df['publisher'] = df['publisher'].apply(parse_list_field)
+
+        def parse_number_field(x):
+            if pd.isnull(x):
+                return 0
+            x = re.sub(r'[\(\),]', '', x)
+            x = x.replace(',', '')
+            try:
+                return int(x)
+            except ValueError:
+                return 0
+
+        df['number_of_reviews_from_purchased_people'] = df['number_of_reviews_from_purchased_people'].apply(parse_number_field)
+        df['number_of_english_reviews'] = df['number_of_english_reviews'].apply(parse_number_field)
+
+        def parse_date(date_str):
+            try:
+                return datetime.strptime(date_str, '%d %b, %Y')
+            except ValueError:
+                try:
+                    return datetime.strptime(date_str, '%b %Y')
+                except ValueError:
+                    return pd.NaT
+
+        df['release_date'] = df['release_date'].apply(parse_date)
+        
+        # Add the 'description' column here
+        df['description'] = df['short_description'].fillna('') + ' ' + df['long_description'].fillna('')
+
+        return df
+
+    df_rec = clean_data(df_rec)
+
+    @st.cache_resource
+    def feature_engineering_and_train_model(df):
+        valid_ratings = [
+            'Overwhelmingly Positive', 'Very Positive', 'Mostly Positive', 'Positive',
+            'Mixed', 'Negative', 'Mostly Negative', 'Very Negative', 'Overwhelmingly Negative'
+        ]
+        df = df[df['overall_player_rating'].isin(valid_ratings)]
+
+        rating_mapping = {
+            'Overwhelmingly Positive': 'Positive',
+            'Very Positive': 'Positive',
+            'Mostly Positive': 'Positive',
+            'Positive': 'Positive',
+            'Mixed': 'Mixed',
+            'Mostly Negative': 'Negative',
+            'Negative': 'Negative',
+            'Very Negative': 'Negative',
+            'Overwhelmingly Negative': 'Negative'
+        }
+        df['overall_player_rating'] = df['overall_player_rating'].map(rating_mapping)
+
+        # The 'description' column is already added in clean_data, no need to add it here
+        # df['description'] = df['short_description'].fillna('') + ' ' + df['long_description'].fillna('')
+
+        tfidf = TfidfVectorizer(max_features=5000, stop_words='english', ngram_range=(1, 2))
+        tfidf.fit(df['description'])
+
+        mlb_genres = MultiLabelBinarizer()
+        mlb_genres.fit(df['genres'])
+        mlb_developers = MultiLabelBinarizer()
+        mlb_developers.fit(df['developer'])
+        mlb_publishers = MultiLabelBinarizer()
+        mlb_publishers.fit(df['publisher'])
+
+        le_rating = LabelEncoder()
+        df['overall_player_rating_encoded'] = le_rating.fit_transform(df['overall_player_rating'])
+
+        text_features = tfidf.transform(df['description'])
+        genres_encoded = mlb_genres.transform(df['genres'])
+        developers_encoded = mlb_developers.transform(df['developer'])
+        publishers_encoded = mlb_publishers.transform(df['publisher'])
+        numeric_features = df[['number_of_reviews_from_purchased_people', 'number_of_english_reviews']].fillna(0)
+        final_features = hstack([text_features, genres_encoded, developers_encoded, publishers_encoded, numeric_features])
+
+        X = final_features
+        y = df['overall_player_rating_encoded']
+
+        X_train, _, y_train, _ = train_test_split(X, y, test_size=0.2, random_state=42, stratify=y)
+        ros = RandomOverSampler(random_state=42)
+        X_train_resampled, y_train_resampled = ros.fit_resample(X_train, y_train)
+
+        selector = SelectKBest(chi2, k=1000)
+        X_train_selected = selector.fit_transform(X_train_resampled, y_train_resampled)
+
+        rf_model = RandomForestClassifier(n_estimators=200, random_state=42, class_weight='balanced', n_jobs=-1)
+        rf_model.fit(X_train_selected, y_train_resampled)
+
+        return rf_model, selector, le_rating, tfidf, mlb_genres, mlb_developers, mlb_publishers
+
+    rf_model_rec, selector_rec, le_rating_rec, tfidf_rec, mlb_genres_rec, mlb_developers_rec, mlb_publishers_rec = feature_engineering_and_train_model(df_rec)
+
+    def recommend_games_rf(genres_list, developer_list, publisher_list):
+        mask = np.ones(len(df_rec), dtype=bool)
+        if genres_list:
+            genres_mask = df_rec['genres'].apply(lambda x: any(genre in x for genre in genres_list))
+            mask = mask & genres_mask
+        if developer_list:
+            dev_mask = df_rec['developer'].apply(lambda x: any(dev in x for dev in developer_list))
+            mask = mask & dev_mask
+        if publisher_list:
+            pub_mask = df_rec['publisher'].apply(lambda x: any(pub in x for pub in publisher_list))
+            mask = mask & pub_mask
+
+        filtered_df = df_rec[mask]
+        if filtered_df.empty:
+            st.write("No games found with the specified criteria.")
+            return
+
+        descriptions = filtered_df['description']
+        text_features = tfidf_rec.transform(descriptions)
+        genres_features = mlb_genres_rec.transform(filtered_df['genres'])
+        developers_features = mlb_developers_rec.transform(filtered_df['developer'])
+        publishers_features = mlb_publishers_rec.transform(filtered_df['publisher'])
+        numeric_features = filtered_df[['number_of_reviews_from_purchased_people', 'number_of_english_reviews']].fillna(0)
+
+        game_features = hstack([text_features, genres_features, developers_features, publishers_features, numeric_features])
+        game_features_selected = selector_rec.transform(game_features)
+
+        predicted_ratings = rf_model_rec.predict(game_features_selected)
+        filtered_df['predicted_rating'] = predicted_ratings
+        filtered_df['predicted_rating_label'] = le_rating_rec.inverse_transform(predicted_ratings)
+
+        recommended_games = filtered_df.sort_values(['predicted_rating', 'number_of_reviews_from_purchased_people'], ascending=[False, False])
+
+        st.write("Recommended Games🕹️:")
+        for idx, row in recommended_games.head(10).iterrows():
+            st.write(f"**Name🎉**: {row['name']}")
+            st.write(f"**Predicted Rating🎢**: {row['predicted_rating_label']}")
+            st.write(f"**Genres**: {', '.join(row['genres'])}")
+            st.write(f"**Developer**: {', '.join(row['developer'])}")
+            st.write(f"**Publisher**: {', '.join(row['publisher'])}")
+            st.write(f"**Number of Reviews🥠**: {row['number_of_reviews_from_purchased_people']}")
+            st.write("---")
+
+    st.markdown("""
+    ### 💫Welcome to the Steam Game Recommendation System!
+
+    💗 This app helps you find games based on your preferences:
+                
+    💗 Select genres you're interested in
+                
+    💗 Choose specific developers
+                
+    💗 Pick preferred publishers
+
+    🖱️Click 'Get Recommendations' to find your perfect games!
+    """)
+
+    all_genres = sorted(set([genre for sublist in df_rec['genres'] for genre in sublist]))
+    all_developers = sorted(set([dev for sublist in df_rec['developer'] for dev in sublist]))
+    all_publishers = sorted(set([pub for sublist in df_rec['publisher'] for pub in sublist]))
+
+    st.sidebar.header("🎮 Game Preference Filters")
+    selected_genres = st.sidebar.multiselect("Select Genres", all_genres)
+    selected_developers = st.sidebar.multiselect("Select Developers", all_developers)
+    selected_publishers = st.sidebar.multiselect("Select Publishers", all_publishers)
+
+    if st.sidebar.button("🚀 Get Recommendations"):
+        recommend_games_rf(selected_genres, selected_developers, selected_publishers)
+
+elif page == "Conclusion🍩":a
     st.title("Conclusion🍩")
     st.markdown("*Summary for midterm*🍩")
     st.markdown('**So far, I have completed the following tasks for the project:**')
@@ -424,9 +894,3 @@ elif page == "Conclusion🍩":
     st.markdown('1. Modeling and prediction')
     st.markdown('2. Deeper multivariate analysis')
     st.markdown('3. Optimization of my Streamlit App')
-    
-
-
-
-
-

@@ -5,9 +5,9 @@ matplotlib
 seaborn
 scikit-learn
 plotly
+vaderSentiment
 wordcloud
 nltk
-vaderSentiment
-textblob
-streamlit-echarts
 pyecharts
+imblearn
+xgboost
