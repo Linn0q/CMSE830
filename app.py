@@ -509,39 +509,53 @@ elif page == "Models🏈":
     else:
         st.write("Please select three...")
 
+    import streamlit as st
+    from sklearn.model_selection import train_test_split
+    from sklearn.ensemble import RandomForestRegressor
+    from sklearn.metrics import mean_squared_error, r2_score
+    import plotly.express as px
+    import plotly.graph_objects as go
+
     st.subheader('Random Forest')
     st.write("Select factor:")
-    target_var = st.selectbox('Select Target', numeric_cols, index=numeric_cols.index('reviewscore') if 'reviewscore' in numeric_cols else 0, key='rf_target_var')
 
-    feature_vars = st.multiselect('Select Feature', [col for col in numeric_cols if col != target_var], default=['avgplaytime', 'copiessold'], key='rf_feature_vars')
+    target_var = st.selectbox('Select Target', numeric_cols, index=0, key='rf_target_var')
+    feature_vars = st.multiselect('Select Feature', [col for col in numeric_cols if col != target_var], key='rf_feature_vars')
 
     if feature_vars:
         X_rf = s1[feature_vars].dropna()
         y_rf = s1[target_var][X_rf.index].dropna()
         X_rf = X_rf.loc[y_rf.index]
         y_rf = y_rf.loc[X_rf.index]
-
+        
         X_train_rf, X_test_rf, y_train_rf, y_test_rf = train_test_split(X_rf, y_rf, test_size=0.2, random_state=42)
-
+        
         rf_model = RandomForestRegressor(n_estimators=100, random_state=42)
         rf_model.fit(X_train_rf, y_train_rf)
         y_pred_rf = rf_model.predict(X_test_rf)
+        
         importances = rf_model.feature_importances_
         feature_importance_df = pd.DataFrame({'feature': feature_vars, 'importance': importances})
         feature_importance_df = feature_importance_df.sort_values('importance', ascending=False)
-
-        fig_rf = px.bar(feature_importance_df, x='feature', y='importance', title='importance')
+        
+        fig_rf = px.bar(feature_importance_df, x='feature', y='importance', title='Feature Importance')
         st.plotly_chart(fig_rf)
-
+        
         fig_rf_pred = go.Figure()
-        fig_rf_pred.add_trace(go.Scatter(x=y_test_rf, y=y_pred_rf, mode='markers'))
-        fig_rf_pred.update_layout(title='Real vs Prediction', xaxis_title='Real', yaxis_title='Prediction')
+        fig_rf_pred.add_trace(go.Scatter(x=y_test_rf, y=y_pred_rf, mode='markers', name='Predictions'))
+        
+        min_val = min(min(y_test_rf), min(y_pred_rf))
+        max_val = max(max(y_test_rf), max(y_pred_rf))
+        fig_rf_pred.add_trace(go.Scatter(x=[min_val, max_val], y=[min_val, max_val], mode='lines', 
+                                        name='Perfect Prediction', line=dict(dash='dash', color='gray')))
+        
+        fig_rf_pred.update_layout(title='Predicted vs Actual Values', xaxis_title='Actual Values', yaxis_title='Predicted Values')
         st.plotly_chart(fig_rf_pred)
-
-        st.write(f"MSE: {mean_squared_error(y_test_rf, y_pred_rf):.2f}")
-        st.write(f"R²: {r2_score(y_test_rf, y_pred_rf):.2f}")
+        
+        st.write(f"Mean Squared Error: {mean_squared_error(y_test_rf, y_pred_rf):.2f}")
+        st.write(f"R² Score: {r2_score(y_test_rf, y_pred_rf):.2f}")
     else:
-        st.write("please select one...")
+        st.write("Please select at least one feature...")
 
     st.markdown("## Part2. Recommandation System")
     @st.cache_data
