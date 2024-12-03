@@ -4,8 +4,7 @@ page = st.sidebar.selectbox("Select Page🛗", ["Welcome🎮","Data🌈", "EDA�
 
 if page == "Welcome🎮":
     st.title("Welcome🎮")
-    st.write("")
-    st.image("https://steamuserimages-a.akamaihd.net/ugc/922549154591526002/87EFBCBF9BEBF5F42CD6E9DADB9EE0CCB79A6E38/?imw=5000&imh=5000&ima=fit&impolicy=Letterbox&imcolor=%23000000&letterbox=false", use_column_width=True)
+    st.image("https://wallpapers.com/images/high/steam-platform-logo-wallpaper-xf5abpdtbsakirq5.webp", use_column_width=True)
     st.markdown("# Hello!🌈")
     st.markdown("### Welcome to my CMSE-830 project!")
     st.write("Do you like games? Do you want to explore more about games?")
@@ -19,17 +18,16 @@ if page == "Welcome🎮":
     st.markdown('*How do player sentiments influence game ratings?*')
     st.markdown('*What makes a great game?*')
     st.write("")
-    st.markdown('- In *Page Data🌈*, I will display my datasets and the detailed cleaning processing is on my Github.')
-    st.markdown('- In *Page Gallery🌷*, I will display my EDA (Exploratory Data Analysis) work.Through a series of visualizations, we can find  ')
-    st.markdown('- In *Page WordCloud🌨️*, I will display my wordcloud analysis. We can discover the hidden trends and patterns in the words.')
-    st.markdown('- In *Page Analysis🏈*, I will display my initial analysis from previous steps, and I will focus more on this part in my rest semester.')
-    st.markdown('- In *Page Conclusion🍩*, I will summarize the results of my analysis and we can discuss together!')
-    st.write("")
+    st.markdown('- **Page Data🌈** displays all of datasets and the detailed cleaning processing is on my Github.')
+    st.markdown('- **Page EDA🌷** displays my EDA (Exploratory Data Analysis) work. Through a series of visualizations, we can find patterns, trends, and insights hidden within the data.')
+    st.markdown('- **Page WordCloud🌨️** displays my wordcloud analysis. We can discover the hidden trends and patterns in the words.')
+    st.markdown('- **Page Model🏈** displays my analysis of recommendation system models, comparing their accuracy and performance to identify the best model for personalized recommendations.')
+    st.markdown('- **Page Recommendation🎯** displays my game recommendation system, helping users discover personalized game suggestions based on their preferences.')
+    st.markdown('- **Page Conclusion🍩** summarizes the results of my analysis and we can discuss together!')
     st.markdown('**Join me on this journey and to understand better the art and science behind games🎉**')
     st.markdown('**Enjoy!🍕🍔🍟🍨🍪🍫🍬🍰**')
   
 elif page == "Data🌈":
-    st.title("Data")
 
     import pandas as pd
     import seaborn as sns
@@ -39,14 +37,108 @@ elif page == "Data🌈":
 
     steam1 = pd.read_csv('steam1.csv')
     steam2 = pd.read_csv('steam2.csv')
+    steam3 = pd.read_csv('s3.csv')
     steam4 = pd.read_csv('steam4.csv')
     steam5 = pd.read_csv('steam5.csv')
+    st.title("Data🌈")
+ 
+    st.markdown("### 🔗 Data Sources")
+    st.markdown("The datasets used in this project were sourced from the following Kaggle repositories:")
+    st.markdown("- [Steam Games Reviews and Rankings](https://www.kaggle.com/datasets/mohamedtarek01234/steam-games-reviews-and-rankings)")
+    st.markdown("- [Top 1500 Games on Steam by Revenue (09-09-2024)](https://www.kaggle.com/datasets/alicemtopcu/top-1500-games-on-steam-by-revenue-09-09-2024)")
+    st.markdown("- [Steam Games Dataset](https://www.kaggle.com/datasets/wajihulhassan369/steam-games-dataset)")
 
-    st.write("About Datasets")
+    st.markdown("These datasets provide a comprehensive overview of Steam games, including reviews, rankings, sales data, and user feedback. They form the foundation for the analysis and recommendation system development in this project. 🚀")
+
+    st.markdown("### 📊 Dataset Overview")
+    st.markdown("In this project, I utilized five datasets from **Kaggle**, which provide diverse information about Steam games. Here’s a closer look at each dataset:")
+
+    st.markdown("- **Dataset 1 (steam1.csv) 🎮**:")
+    st.markdown("  - **Description**: This dataset provides a rich overview of games available on Steam, focusing on their descriptions, user reviews, and popularity.")
+    st.markdown("  - **Key Columns**:")
+    st.markdown("    - `name`: The name of the game.")
+    st.markdown("    - `description`: A detailed textual description of the game.")
+    st.markdown("    - `review_no`: The number of user reviews for each game.")
+    st.markdown("    - `reviewscore`: The overall score of the game, based on user reviews.")
+    st.markdown("    - `tags`: Tags associated with the game, such as genre or gameplay features.")
+    st.markdown("  - **Purpose**: This dataset is ideal for analyzing the relationship between game descriptions, tags, and their popularity, as well as exploring user sentiment and game features.")
+    st.markdown("  - **Source**: [Steam Games Reviews and Rankings](https://www.kaggle.com/datasets/mohamedtarek01234/steam-games-reviews-and-rankings)")
     st.dataframe(steam1.head())
+
+    st.markdown("- **Dataset 2 (steam2.csv) 🛒**:")
+    st.markdown("  - **Description**: This dataset focuses on the financial aspects of Steam games, including their pricing, sales performance, and review scores.")
+    st.markdown("  - **Key Columns**:")
+    st.markdown("    - `price`: The price of the game (in USD).")
+    st.markdown("    - `revenue`: The total revenue generated by the game.")
+    st.markdown("    - `copiessold`: The number of copies sold for each game.")
+    st.markdown("    - `reviewscore`: The overall user rating for the game.")
+    st.markdown("  - **Purpose**: This dataset is instrumental for analyzing how game pricing strategies and sales volumes affect user satisfaction and revenue generation. It also provides a basis for exploring relationships between price, popularity, and reviews.")
     st.dataframe(steam2.head())
+
+    st.markdown("- **Dataset 3 (steam3.csv) ✨**:")
+    st.markdown("  - **Description**: This dataset provides advanced metrics derived from user reviews, including sentiment scores and weighted average ratings for games.")
+    st.markdown("  - **Key Columns**:")
+    st.markdown("    - `game_name`: The name of the game.")
+    st.markdown("    - `sentiment_score`: A numerical value representing the average sentiment derived from user reviews.")
+    st.markdown("    - `weighted_rating`: A weighted average score based on review sentiments and user ratings.")
+    st.markdown("    - `review_count`: The total number of user reviews for each game.")
+    st.markdown("  - **Purpose**: This dataset is essential for understanding how user sentiments and ratings collectively influence a game's perceived quality. It enables the correlation of emotional feedback with quantitative scores.")
+    st.markdown("  - **Source**: [Steam Games Reviews and Rankings](https://www.kaggle.com/datasets/mohamedtarek01234/steam-games-reviews-and-rankings)")
+    st.dataframe(steam3.head())
+
+    st.markdown("- **Dataset 4 (steam4.csv) 🏷️**:")
+    st.markdown("- **Dataset 4 (steam4.csv) 🏷️**:")
+    st.markdown("  - **Description**: This dataset provides information about game genres, tags, and rankings on Steam, enabling an in-depth analysis of user preferences across different game categories.")
+    st.markdown("  - **Key Columns**:")
+    st.markdown("    - `name`: The name of the game.")
+    st.markdown("    - `genre`: The genre of the game (e.g., Action, Adventure, RPG).")
+    st.markdown("    - `tags`: A list of tags describing the game's features and themes.")
+    st.markdown("    - `rank`: The ranking of the game based on revenue.")
+    st.markdown("    - `review_type`: A categorical label indicating the overall review sentiment (e.g., Positive, Negative).")
+    st.markdown("  - **Purpose**: This dataset is particularly valuable for understanding how genre and tags influence a game's revenue and user feedback. It also helps explore the correlation between game rankings and review sentiments.")
+    st.markdown("  - **Source**: [Top 1500 Games on Steam by Revenue (09-09-2024)](https://www.kaggle.com/datasets/alicemtopcu/top-1500-games-on-steam-by-revenue-09-09-2024)")
     st.dataframe(steam4.head())
+
+    st.markdown("- **Dataset 5 (steam5.csv) 🌟**:")
+    st.markdown("  - **Description**: This dataset focuses on overall player ratings and feedback summaries for Steam games, offering a comprehensive view of player satisfaction and game success.")
+    st.markdown("  - **Key Columns**:")
+    st.markdown("    - `name`: The name of the game.")
+    st.markdown("    - `overall_player_rating`: The aggregated player rating for the game.")
+    st.markdown("    - `review_type`: A label categorizing reviews as Positive or Negative.")
+    st.markdown("    - `reviewscore`: The user-generated score indicating the overall quality of the game.")
+    st.markdown("    - `rating_count`: The total number of player ratings.")
+    st.markdown("  - **Purpose**: This dataset is ideal for evaluating the general reception of games among players. It can be used to analyze trends in player feedback, identify factors driving high ratings, and correlate ratings with other performance metrics.")
+    st.markdown("  - **Source**: [Steam Games Dataset](https://www.kaggle.com/datasets/wajihulhassan369/steam-games-dataset)")
     st.dataframe(steam5.head())
+
+    st.markdown("### 🧹 Data Cleaning Overview")
+    st.markdown("To ensure high-quality analysis and accurate modeling, a thorough data cleaning process was implemented. Here's a summary of the main steps, accompanied by some exciting highlights: ")
+
+    st.markdown("- **1. Handling Missing Values 🔍**: Identified missing entries across datasets and applied tailored strategies, including:")
+    st.markdown("  - **MICE (Multiple Imputation by Chained Equations)**: Used advanced imputation methods to estimate missing values in numerical fields (e.g., `revenue`, `reviewscore`). This technique considers correlations between features, ensuring more accurate imputations.")
+    st.markdown("  - **Default Values**: Replaced missing categorical fields (e.g., `tags`, `review_type`) with placeholders like 'Unknown'.")
+    st.markdown("  - **Dropping Rows**: Removed rows with excessive missing information when necessary.")
+
+    st.markdown("- **2. Removing Duplicates 🗑️**: Checked for duplicate entries using game names and unique IDs, ensuring no redundant data skewed the results.")
+
+    st.markdown("- **3. Standardizing Formats 📏**:")
+    st.markdown("  - Unified date formats to `YYYY-MM-DD` for consistency.")
+    st.markdown("  - Normalized text fields like `tags` and `genres` for easier processing (e.g., lowercasing, trimming spaces).")
+    st.markdown("  - Converted numerical data types for efficient computation.")
+
+    st.markdown("- **4. Dealing with Outliers 🚨**: Applied robust statistical techniques to detect and manage outliers:")
+    st.markdown("  - Used **IQR (Interquartile Range)** to identify extreme values in fields like `price` and `revenue`.")
+    st.markdown("  - Adjusted or removed outliers to maintain data quality.")
+
+    st.markdown("- **5. Data Enrichment and Feature Engineering ✨**:")
+    st.markdown("  - Created new features, such as:")
+    st.markdown("    - `review_density`: Number of reviews per unit of sales.")
+    st.markdown("    - `price_per_hour`: Price divided by average playtime.")
+    st.markdown("  - Enhanced datasets by merging sentiment scores and weighted averages.")
+
+    st.markdown("- **6. Data Merging 🔗**: Seamlessly merged datasets using common keys like `name` and `game_id` to consolidate information from various sources.")
+
+    st.markdown("**All of datasets provide the foundation for my exploratory data analysis, modeling, and recommendation system development. Let's dive in and explore the art and science behind games! ✨**")
 
 elif page == "EDA🌷":
     st.title("EDA🌷")
@@ -230,6 +322,15 @@ elif page == "EDA🌷":
 
 elif page == "WordCloud🌨️":
     st.title("WordCloud🌨️")
+
+    st.markdown("### 🌟 Overview")
+    st.markdown("In this section, we use **Word Clouds** to visualize the most frequently occurring words and phrases in various text fields. Word clouds help us uncover hidden patterns and trends in the dataset, offering an intuitive way to explore textual data. 🎨")
+
+    st.markdown("### 🔍 Key Insights")
+    st.markdown("- **Tags Word Cloud**: Highlights the most common tags associated with games, showcasing popular genres and features.")
+    st.markdown("- **Long Description Word Cloud**: Extracts key terms from the detailed game descriptions, revealing how developers describe their games to potential players.")
+    st.markdown("- **Short Description Word Cloud**: Focuses on the shorter promotional descriptions, which provide a concise summary of the game's features and appeal.")
+
     import plotly.graph_objects as go
     import plotly.express as px
     import pandas as pd
@@ -255,6 +356,7 @@ elif page == "WordCloud🌨️":
     s2 = pd.read_csv('s2.csv')
     s3 = pd.read_csv('s3.csv')
 
+    st.markdown("#### 🎮 Tags Word Cloud")
     all_tags = ' '.join(s1['tags'].dropna()) 
     wordcloud_tags = WordCloud(width=800, height=400, background_color='white').generate(all_tags)
     wordcloud_array = np.array(wordcloud_tags)
@@ -264,8 +366,8 @@ elif page == "WordCloud🌨️":
     fig.update_layout(margin=dict(l=0, r=0, t=30, b=0))  
     st.plotly_chart(fig)
 
+    st.markdown("#### 📝 Long Description Word Cloud")
     long_desc_text = ' '.join(s2['long_description'].dropna())
-
     wordcloud_long_desc = WordCloud(background_color="white", max_words=200).generate(long_desc_text)
     fig = px.imshow(wordcloud_long_desc, title="Word Cloud for Game Long Descriptions")
     fig.update_xaxes(visible=False)
@@ -273,8 +375,8 @@ elif page == "WordCloud🌨️":
     fig.update_layout(margin=dict(l=0, r=0, t=30, b=0))  
     st.plotly_chart(fig)
 
+    st.markdown("#### ✨ Short Description Word Cloud")
     short_desc_text = ' '.join(s2['short_description'].dropna())
-
     wordcloud_short_desc = WordCloud(background_color="white", max_words=200).generate(short_desc_text)
     fig = px.imshow(wordcloud_short_desc, title="Word Cloud for Game Short Descriptions")
     fig.update_xaxes(visible=False)
@@ -282,23 +384,56 @@ elif page == "WordCloud🌨️":
     fig.update_layout(margin=dict(l=0, r=0, t=30, b=0))  
     st.plotly_chart(fig)
 
+    st.markdown("### 🔗 Summary")
+    st.markdown("- The **Tags Word Cloud** helps identify popular genres or gameplay features.")
+    st.markdown("- The **Long Description Word Cloud** provides insights into how games are marketed to players, highlighting key themes.")
+    st.markdown("- The **Short Description Word Cloud** emphasizes the concise features that attract players' attention.")
+    st.markdown("Word Clouds are a visually appealing way to explore textual data, guiding deeper analyses into player preferences and game characteristics. 🚀")
+
 elif page == "Models🏈":
     st.title("Models🏈")
-    st.write("On this page, we will showcase the training and evaluation results of multiple machine learning models 🤖📊, as well as content-based game recommendations 🎮✨.")
-    st.markdown("## Part1. Data")
+
+    st.write("On this page, we showcase the training and evaluation results of multiple machine learning models 🤖📊 and explore a content-based game recommendation system 🎮✨.")
+    st.markdown("### 📊 Overview")
+    st.markdown("- **Part 1: Data Analysis and Modeling**")
+    st.markdown("  - Includes training and evaluation of models such as Linear Regression, Random Forest, and PCA visualizations.")
+    st.markdown("- **Part 2: Recommendation System**")
+    st.markdown("  - A content-based recommendation system built using advanced feature engineering and model evaluation.")
+    st.markdown("### 🔑 Key Features")
+    st.markdown("- **Interactive Model Training**: Users can select features and parameters for training.")
+    st.markdown("- **Model Evaluation**: Provides insights into model performance using metrics like MSE, R², and visualizations.")
+    st.markdown("- **Recommendation System**: Suggests games based on player preferences and game attributes.")
 
     import pandas as pd
     import numpy as np
+    from datetime import datetime
+    import re
+    import ast
+    from collections import Counter
+    from scipy.sparse import hstack
     import matplotlib.pyplot as plt
     import seaborn as sns
-    from sklearn.linear_model import LinearRegression
-    from sklearn.model_selection import train_test_split
-    from sklearn.ensemble import RandomForestRegressor
-    from sklearn.metrics import mean_squared_error, r2_score
-    from sklearn.preprocessing import StandardScaler
-    from sklearn.decomposition import PCA
     import plotly.express as px
     import plotly.graph_objects as go
+    from wordcloud import WordCloud
+    from sklearn.model_selection import train_test_split
+    from sklearn.preprocessing import LabelEncoder, MultiLabelBinarizer, StandardScaler
+    from sklearn.feature_extraction.text import TfidfVectorizer
+    from sklearn.metrics import (
+        classification_report, accuracy_score, confusion_matrix, mean_squared_error, r2_score
+    )
+    from sklearn.feature_selection import SelectKBest, chi2
+    from sklearn.decomposition import PCA, TruncatedSVD
+    from sklearn.linear_model import LinearRegression, LogisticRegression
+    from sklearn.ensemble import RandomForestRegressor, RandomForestClassifier
+    from sklearn.svm import LinearSVC
+    from sklearn.neighbors import KNeighborsClassifier, NearestNeighbors
+    from sklearn.naive_bayes import MultinomialNB
+    import xgboost as xgb
+    from imblearn.over_sampling import RandomOverSampler
+    import warnings
+    warnings.filterwarnings('ignore')
+
 
     steam1 = pd.read_csv('steam1.csv')
     steam2 = pd.read_csv('steam2.csv')
@@ -407,45 +542,6 @@ elif page == "Models🏈":
         st.write(f"R²: {r2_score(y_test_rf, y_pred_rf):.2f}")
     else:
         st.write("please select one...")
-
-    import pandas as pd
-    import numpy as np
-    import re
-    from datetime import datetime
-    import ast
-    from collections import Counter
-
-    from sklearn.model_selection import train_test_split
-    from sklearn.preprocessing import LabelEncoder, MultiLabelBinarizer
-    from sklearn.feature_extraction.text import TfidfVectorizer
-    from sklearn.metrics import classification_report, accuracy_score
-    from sklearn.svm import LinearSVC
-    from sklearn.ensemble import RandomForestClassifier
-    from sklearn.neighbors import KNeighborsClassifier
-    from sklearn.naive_bayes import MultinomialNB
-    from sklearn.linear_model import LogisticRegression
-    import xgboost as xgb
-    from sklearn.feature_selection import SelectKBest, chi2
-    from imblearn.over_sampling import RandomOverSampler
-    from sklearn.decomposition import TruncatedSVD
-    from sklearn.neighbors import NearestNeighbors
-    from scipy.sparse import hstack
-    import pandas as pd
-    import numpy as np
-    import re
-    from datetime import datetime
-    import ast
-    from collections import Counter
-    from scipy.sparse import hstack
-    from sklearn.feature_selection import SelectKBest, chi2
-    import plotly.express as px
-    import plotly.graph_objects as go
-    from wordcloud import WordCloud
-    from sklearn.metrics import confusion_matrix
-    from sklearn.decomposition import TruncatedSVD
-
-    import warnings
-    warnings.filterwarnings('ignore')
 
     st.markdown("## Part2. Recommandation System")
     @st.cache_data
@@ -687,7 +783,6 @@ elif page == "Recommendation🎯":
     from imblearn.over_sampling import RandomOverSampler
     import warnings
     warnings.filterwarnings('ignore')
-
     @st.cache_data
     def load_and_clean_data():
         dtypes = {
@@ -859,15 +954,15 @@ elif page == "Recommendation🎯":
     st.markdown("""
     ### 💫Welcome to the Steam Game Recommendation System!
 
-    💗 This app helps you find games based on your preferences:
+    💗 **This app helps you find games based on your preferences:**
                 
-    💗 Select genres you're interested in
+    💗 **Select genres you're interested in**
                 
-    💗 Choose specific developers
+    💗 **Choose specific developers**
                 
-    💗 Pick preferred publishers
+    💗 **Pick preferred publishers**
 
-    🖱️Click 'Get Recommendations' to find your perfect games!
+    🖱️**Click 'Get Recommendations' to find your perfect games!**
     """)
 
     all_genres = sorted(set([genre for sublist in df_rec['genres'] for genre in sublist]))
@@ -884,13 +979,46 @@ elif page == "Recommendation🎯":
 
 elif page == "Conclusion🍩":
     st.title("Conclusion🍩")
-    st.markdown("*Summary for midterm*🍩")
-    st.markdown('**So far, I have completed the following tasks for the project:**')
-    st.markdown('1. Data Collection and Cleaning')
-    st.markdown('2. Exploratory Data Analysis')
-    st.markdown('3. Sentiment Analysis')
-    st.markdown('4. Initial Visualizations')
-    st.markdown('**Here is my future plan:**')
-    st.markdown('1. Modeling and prediction')
-    st.markdown('2. Deeper multivariate analysis')
-    st.markdown('3. Optimization of my Streamlit App')
+    st.markdown("""
+    This project leverages Steam game data to develop a comprehensive system that integrates data analysis, visualization, and machine learning modeling. Here are the key highlights and outcomes:
+    """)
+
+    st.markdown("### 📊 Data Analysis and Exploration")
+    st.markdown("""
+    1. **Data Cleaning and Preprocessing**:
+    - Processed datasets from multiple sources, including game descriptions, player ratings, and sales data, to ensure data quality and consistency.
+    - Addressed missing values (e.g., using MICE imputation), handled outliers, and standardized formats for seamless analysis.
+    - Engineered new features like `review_density` and `price_per_hour` to enhance analytical depth.
+
+    2. **Exploratory Data Analysis (EDA)**:
+    - Interactive visualizations showcased trends in game genres, tags, and ratings, along with the relationship between price and sales volume.
+    - Word clouds revealed popular themes in game descriptions and tags, providing insights into player preferences and market trends.
+    """)
+
+    st.markdown("### 🤖 Machine Learning Modeling")
+    st.markdown("""
+    1. **Model Evaluation and Comparison**:
+    - Trained and evaluated multiple models (e.g., Linear Regression, Random Forest, and PCA), assessing performance using metrics such as MSE and R².
+    - Conducted feature importance analysis to identify critical factors influencing game ratings and sales.
+
+    2. **Recommendation System Development**:
+    - Built a content-based recommendation system combining TF-IDF textual features and game tags to provide personalized game suggestions.
+    - Integrated visualizations of model evaluation and recommendation results to enhance user engagement.
+    """)
+
+    st.markdown("### 🎮 System Features and User Experience")
+    st.markdown("""
+    - **Multi-functional Pages**:
+    - Structured into modules for data display, EDA, modeling, and recommendation system, allowing users to explore and interact dynamically.
+    - **Interactive Interface**:
+    - Enables users to select variables, adjust parameters, and view real-time results, showcasing the power of data-driven analysis.
+    - **Scalability and Practicality**:
+    - Designed to integrate new data effortlessly, ensuring broad applicability and robust functionality.
+    """)
+
+    st.markdown("### Key Achievements 🚀")
+    st.markdown("""
+    - Identified critical factors contributing to game success, such as tags, pricing strategies, and player ratings.
+    - Demonstrated the potential of data science in enhancing user experience and driving business value through personalized recommendations.
+    - Delivered a complete workflow of data analysis and modeling, highlighting the practical application of data-driven decision-making.
+    """)
