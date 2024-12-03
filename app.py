@@ -118,7 +118,8 @@ elif page == "Data🌈":
     st.markdown("  - **MICE (Multiple Imputation by Chained Equations)**: Used advanced imputation methods to estimate missing values in numerical fields (e.g., `revenue`, `reviewscore`). This technique considers correlations between features, ensuring more accurate imputations.")
     st.markdown("  - **Default Values**: Replaced missing categorical fields (e.g., `tags`, `review_type`) with placeholders like 'Unknown'.")
     st.markdown("  - **Dropping Rows**: Removed rows with excessive missing information when necessary.")
-
+    st.image("https://github.com/Linn0q/CMSE830/blob/main/MICE1.png?raw=true", use_column_width=True)
+    st.image("https://github.com/Linn0q/CMSE830/blob/main/MICE2.png?raw=true", use_column_width=True)
     st.markdown("- **2. Removing Duplicates 🗑️**: Checked for duplicate entries using game names and unique IDs, ensuring no redundant data skewed the results.")
 
     st.markdown("- **3. Standardizing Formats 📏**:")
