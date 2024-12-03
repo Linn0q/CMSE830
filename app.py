@@ -87,7 +87,6 @@ elif page == "Data🌈":
     st.dataframe(steam3.head())
 
     st.markdown("- **Dataset 4 (steam4.csv) 🏷️**:")
-    st.markdown("- **Dataset 4 (steam4.csv) 🏷️**:")
     st.markdown("  - **Description**: This dataset provides information about game genres, tags, and rankings on Steam, enabling an in-depth analysis of user preferences across different game categories.")
     st.markdown("  - **Key Columns**:")
     st.markdown("    - `name`: The name of the game.")
@@ -192,7 +191,7 @@ elif page == "EDA🌷":
     st.write("💡")
 
 #2
-    st.subheader('Top 10 Game Genes/Tags')
+    st.subheader('Top 10 Game Genr·es/Tags')
     s1['tags'] = s1['tags'].fillna('')
     s1['tag_list'] = s1['tags'].str.split(',')
     tags = s1.explode('tag_list')
