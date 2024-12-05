@@ -51,33 +51,18 @@ The project utilizes datasets from Kaggle:
 - WordCloud
 - XGBoost
 
-## Project Structure 📁
-```
-steam-game-analysis/
-├── app.py
-├── requirements.txt
-├── data/
-│   ├── steam1.csv
-│   ├── steam2.csv
-│   ├── steam3.csv
-│   ├── steam4.csv
-│   └── steam5.csv
-└── README.md
-```
-
 ## **Project Structure**
 
 ```bash
-├── app.py                # Main Streamlit app
-├── steam1.csv            # Steam dataset 1
-├── steam2.csv            # Steam dataset 2
-├── steam4.csv            # Additional dataset
-├── steam5.csv            # Additional dataset
-├── s1.csv                # Sentiment analysis dataset
-├── s2.csv                # Sentiment analysis dataset
-├── README.md             # Project README
-└── .streamlit
-    └── config.toml       # Theme configuration for Streamlit
+├── app.py               
+├── steam1.csv           
+├── steam2.csv           
+├── steam4.csv          
+├── steam5.csv          
+├── s1.csv                
+├── s2.csv               
+├── s3.csv              
+└── README.md
 ```
 ## **Contact**
 
