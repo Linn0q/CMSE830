@@ -13,8 +13,8 @@ if page == "Welcome🎮":
     st.write("But what truly influences these ratings? Is it the genre, the gameplay, or perhaps the emotional connection a player has with the game?")
     st.write("Let's find out with me!")
     st.write("In this project, I aim to dive deep into the data behind games on Steam. I will explore how various factors such as game genre, publisher, and so on correlate with overall game ratings.")
-    st.write("My goal is to discover insights that can help both gamer players and developers understand what drives game popularity, and how emotional engagement reflected in user comments relates to game success.")
-    st.write("And after analysis I hope that I can answer questions that every gamer players or developer wonders about: ")
+    st.write("My goal is to discover insights that can help both game players and developers understand what drives game popularity, and how emotional engagement reflected in user comments relates to game success.")
+    st.write("And after analysis I hope that I can answer questions that every game players or developer wonders about: ")
     st.markdown('*How do player sentiments influence game ratings?*')
     st.markdown('*What makes a great game?*')
     st.write("")
@@ -43,7 +43,7 @@ elif page == "Data🌈":
     st.title("Data🌈")
  
     st.markdown("### 🔗 Data Sources")
-    st.markdown("The datasets used in this project were sourced from the following Kaggle repositories:")
+    st.markdown("The datasets used in this project were from the following Kaggle webpage:")
     st.markdown("- [Steam Games Reviews and Rankings](https://www.kaggle.com/datasets/mohamedtarek01234/steam-games-reviews-and-rankings)")
     st.markdown("- [Top 1500 Games on Steam by Revenue (09-09-2024)](https://www.kaggle.com/datasets/alicemtopcu/top-1500-games-on-steam-by-revenue-09-09-2024)")
     st.markdown("- [Steam Games Dataset](https://www.kaggle.com/datasets/wajihulhassan369/steam-games-dataset)")
@@ -57,7 +57,7 @@ elif page == "Data🌈":
     st.markdown("  - **Description**: This dataset provides a rich overview of games available on Steam, focusing on their descriptions, user reviews, and popularity.")
     st.markdown("  - **Key Columns**:")
     st.markdown("    - `name`: The name of the game.")
-    st.markdown("    - `description`: A detailed textual description of the game.")
+    st.markdown("    - `description`: A detailed description of the game.")
     st.markdown("    - `review_no`: The number of user reviews for each game.")
     st.markdown("    - `reviewscore`: The overall score of the game, based on user reviews.")
     st.markdown("    - `tags`: Tags associated with the game, such as genre or gameplay features.")
@@ -111,7 +111,7 @@ elif page == "Data🌈":
     st.dataframe(steam5.head())
 
     st.markdown("### 🧹 Data Cleaning Overview")
-    st.markdown("To ensure high-quality analysis and accurate modeling, a thorough data cleaning process was implemented. Here's a summary of the main steps, accompanied by some exciting highlights: ")
+    st.markdown("To ensure high-quality analysis and accurate modeling, a thorough data cleaning process was implemented. Here's a summary of the main steps, accompanied by some highlights: ")
 
     st.markdown("- **1. Handling Missing Values 🔍**: Identified missing entries across datasets and applied tailored strategies, including:")
     st.markdown("  - **MICE (Multiple Imputation by Chained Equations)**: Used advanced imputation methods to estimate missing values in numerical fields (e.g., `revenue`, `reviewscore`). This technique considers correlations between features, ensuring more accurate imputations.")
@@ -126,7 +126,7 @@ elif page == "Data🌈":
     st.markdown("  - Normalized text fields like `tags` and `genres` for easier processing (e.g., lowercasing, trimming spaces).")
     st.markdown("  - Converted numerical data types for efficient computation.")
 
-    st.markdown("- **4. Dealing with Outliers 🚨**: Applied robust statistical techniques to detect and manage outliers:")
+    st.markdown("- **4. Dealing with Outliers 🚨**: Applied statistical techniques to detect and manage outliers:")
     st.markdown("  - Used **IQR (Interquartile Range)** to identify extreme values in fields like `price` and `revenue`.")
     st.markdown("  - Adjusted or removed outliers to maintain data quality.")
 
@@ -1005,7 +1005,7 @@ elif page == "Conclusion🍩":
     - Engineered new features like `review_density` and `price_per_hour` to enhance analytical depth.
 
     2. **Exploratory Data Analysis (EDA)**:
-    - Interactive visualizations showcased trends in game genres, tags, and ratings, along with the relationship between price and sales volume.
+    - Interactive visualizations showcased trends in game genres, tags, and ratings, along with the relationship between price and sales.
     - Word clouds revealed popular themes in game descriptions and tags, providing insights into player preferences and market trends.
     """)
 
