@@ -1,78 +1,69 @@
 # CMSE830-Project
 
-# **Video Game Sentiment Analysis and Rating Prediction Based on Steam User Ratings**
+# Steam Game Analysis System 🎮
 
-## **Project Overview**
-This project explores video game ratings and user reviews on **Steam**, focusing on sentiment analysis and rating prediction. The project is built using **Streamlit** and features interactive visualizations, word clouds, and machine learning models.
+## Overview 🌟
+This Streamlit application analyzes Steam gaming data, providing insights through data visualization, machine learning models, and a recommendation system. The app helps users explore game trends, understand player preferences, and discover new games based on their interests.
 
-## **Key Features**
+## Features ✨
 
-1. **Homepage**: Introduces the project.
+### Data Analysis & Visualization 📊
+- Interactive data exploration with dynamic visualizations
+- Multiple dataset analysis covering game details, reviews, and player statistics
+- Comprehensive EDA (Exploratory Data Analysis) with various chart types
+- Word cloud analysis of game descriptions and tags
 
-2. **Data Page**: Displays the datasets used in the project.
+### Machine Learning Models 🤖
+- Linear Regression analysis for game performance prediction
+- Random Forest modeling for feature importance analysis
+- Principal Component Analysis (PCA) for dimension reduction
+- KDE (Kernel Density Estimation) analysis
 
-3. **Gallery Page**: Shows exploratory data analysis (EDA) work.
+### Game Recommendation System 🎯
+- Content-based recommendation engine
+- Filtering by genres, developers, and publishers
+- Personalized game suggestions based on user preferences
+- Integration of review scores and player ratings
 
-4. **WordCloud Page**: Generates word clouds based on keywords.
+## Pages in the App 📑
+1. **Welcome** 🎮: Introduction and project overview
+2. **Data** 🌈: Dataset descriptions and cleaning process
+3. **EDA** 🌷: Interactive data visualizations and analysis
+4. **WordCloud** 🌨️: Text analysis of game descriptions and tags
+5. **Models** 🏈: Machine learning model implementations
+6. **Recommendation** 🎯: Game recommendation system
+7. **Summary** 🍩: Project insights and conclusions
 
-5. **Analysis Page**: Features the initial analysis and model building.
-   - **Linear Regression**: Analyzes the playtime and review score relationship.
-   - **KDE Analysis**: Shows kernel density estimation for selected variables.
-   - **PCA**: Performs Principal Component Analysis to reduce dimensionality.
-   - **Random Forest**: Builds a random forest model for prediction and displays feature importance.
+## Data Sources 📚
+The project utilizes datasets from Kaggle:
+- [Steam Games Reviews and Rankings](https://www.kaggle.com/datasets/mohamedtarek01234/steam-games-reviews-and-rankings)
+- [Top 1500 Games on Steam by Revenue](https://www.kaggle.com/datasets/alicemtopcu/top-1500-games-on-steam-by-revenue-09-09-2024)
+- [Steam Games Dataset](https://www.kaggle.com/datasets/wajihulhassan369/steam-games-dataset)
 
-6. **Conclusion Page**: Summarizes the project's progress and future plans.
-   - Review the completed tasks and outline the upcoming work, including model optimization and advanced analysis.
-
-## **Installation and Setup**
-
-### **Prerequisites**
-- Python 
+## Technologies Used 🛠️
+- Python
 - Streamlit
 - Pandas
-- Seaborn
-- Plotly
+- NumPy
 - Scikit-learn
+- Plotly
 - NLTK
-- Matplotlib
 - WordCloud
-- VADER Sentiment (nltk)
+- XGBoost
 
 ## **Project Structure**
 
 ```bash
-├── app.py                # Main Streamlit app
-├── steam1.csv            # Steam dataset 1
-├── steam2.csv            # Steam dataset 2
-├── steam4.csv            # Additional dataset
-├── steam5.csv            # Additional dataset
-├── s1.csv                # Sentiment analysis dataset
-├── s2.csv                # Sentiment analysis dataset
-├── README.md             # Project README
-└── .streamlit
-    └── config.toml       # Theme configuration for Streamlit
+├── app.py               
+├── steam1.csv           
+├── steam2.csv           
+├── steam4.csv          
+├── steam5.csv          
+├── s1.csv                
+├── s2.csv               
+├── s3.csv              
+└── README.md
 ```
-
-## **How to Use the App**
-
-1. **Homepage🎮**:
-   - Introduction to the project, featuring an overview of the analysis and goals.
-2. **Data🌈**:
-   - Explore the datasets and view the cleaning process.
-3. **Gallery🌷**:
-   - Navigate through various interactive visualizations that offer insights into the dataset.
-4. **WordCloud🌨️**:
-   - Visualize word clouds based on Steam user reviews and game descriptions.
-5. **Analysis🏈**:
-   - Explore the initial analysis, including regression and PCA.
-6. **Conclusion🍩**:
-   - Review the progress made and future plans for the project.
-
-## **Future Work**
-1. **Modeling and Prediction**: Build more models to predict game ratings based on user sentiment and game features.
-2. **Multivariate Analysis**: Explore the interactions between variables more deeply.
-3. **App Optimization**: Improve the Streamlit app for better user interaction and performance.
-
 ## **Contact**
 
 For any questions or feedback, feel free to contact me at wangj324@msu.edu
