@@ -23,7 +23,7 @@ if page == "Welcome🎮":
     st.markdown('- **Page WordCloud🌨️** displays my wordcloud analysis. We can discover the hidden trends and patterns in the words.')
     st.markdown('- **Page Model🏈** displays my analysis of recommendation system models, comparing their accuracy and performance to identify the best model for personalized recommendations.')
     st.markdown('- **Page Recommendation🎯** displays my game recommendation system, helping users discover personalized game suggestions based on their preferences.')
-    st.markdown('- **Page Conclusion🍩** summarizes the results of my analysis and we can discuss together!')
+    st.markdown('- **Page Summary🍩** summarizes the results of my analysis and we can discuss together!')
     st.markdown('**Join me on this journey and to understand better the art and science behind games🎉**')
     st.markdown('**Enjoy!🍕🍔🍟🍨🍪🍫🍬🍰**')
   
@@ -1014,7 +1014,7 @@ elif page == "Summary🍩":
 
     Users can adjust settings in real-time ⚡. The interface displays immediate results 🖥️. New data integrates smoothly into the system 🔄.
 
-    **This project demonstrates how data science can improve the gaming experience 🎮. The system helps make informed decisions about game development and marketing 📈.**
+    **🎮 This project demonstrates how data science can improve the gaming experience 🎮. The system helps make informed decisions about game development and marketing 📈.**
 
     **Also, the workflow shows data analytics in action 📈 ⚙️. It provides clear value to players and game developers 🎯.**
     """)
