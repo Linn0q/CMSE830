@@ -994,11 +994,11 @@ elif page == "Recommendation🎯":
 elif page == "Summary🍩":
     st.title("Summary🍩")
     st.markdown("""
-    # 🎮 Project Summary: Steam Game Analysis System
+    # 🎮 Steam Game Analysis System
 
     ## 📊 Data Processing and Analysis
 
-    We cleaned and standardized Steam gaming data from multiple sources ✨. The process included fixing missing values and removing outliers 🔍. We created new metrics like review density and price-per-hour 📈.
+    I cleaned and standardized Steam gaming data from multiple sources ✨. The process included fixing missing values and removing outliers 🔍. I created new metrics like review density and price-per-hour 📈.
 
     Our analysis revealed key patterns in gaming trends 🎯. Visualizations showed relationships between game prices and sales 💰. Word clouds highlighted popular themes in game descriptions 🔤.
 
@@ -1014,14 +1014,7 @@ elif page == "Summary🍩":
 
     Users can adjust settings in real-time ⚡. The interface displays immediate results 🖥️. New data integrates smoothly into the system 🔄.
 
-    ## 🌟 Results and Impact 
+    **This project demonstrates how data science can improve the gaming experience 🎮. The system helps make informed decisions about game development and marketing 📈.**
 
-    The analysis uncovered key success factors for games 🎯. These include:
-    - Effective tag selection 🏷️
-    - Strategic pricing decisions 💰
-    - Strong player rating management ⭐
-
-    The project shows how data science improves gaming experiences 🎮. The system helps make informed decisions about game development and marketing 📈.
-
-    The complete workflow demonstrates practical data analysis in action ⚙️. It offers clear value for both players and game developers 🎯.
+    **Also, the workflow shows data analytics in action 📈 ⚙️. It provides clear value to players and game developers 🎯.**
     """)
