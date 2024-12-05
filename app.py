@@ -1,6 +1,6 @@
 import streamlit as st
 
-page = st.sidebar.selectbox("Select Page🛗", ["Welcome🎮","Data🌈", "EDA🌷","WordCloud🌨️","Models🏈","Recommendation🎯","Conclusion🍩",])
+page = st.sidebar.selectbox("Select Page🛗", ["Welcome🎮","Data🌈", "EDA🌷","WordCloud🌨️","Models🏈","Recommendation🎯","Summary🍩",])
 
 if page == "Welcome🎮":
     st.title("Welcome🎮")
@@ -324,7 +324,7 @@ elif page == "WordCloud🌨️":
     st.title("WordCloud🌨️")
 
     st.markdown("### 🌟 Overview")
-    st.markdown("In this section, we use **Word Clouds** to visualize the most frequently occurring words and phrases in various text fields. Word clouds help us uncover hidden patterns and trends in the dataset, offering an intuitive way to explore textual data. 🎨")
+    st.markdown("In this section, I use **Word Clouds** to visualize the most frequently occurring words and phrases in various text fields. Word clouds help us uncover hidden patterns and trends in the dataset, offering an intuitive way to explore textual data. 🎨")
 
     st.markdown("### 🔍 Key Insights")
     st.markdown("- **Tags Word Cloud**: Highlights the most common tags associated with games, showcasing popular genres and features.")
@@ -393,7 +393,7 @@ elif page == "WordCloud🌨️":
 elif page == "Models🏈":
     st.title("Models🏈")
 
-    st.write("On this page, we showcase the training and evaluation results of multiple machine learning models 🤖📊 and explore a content-based game recommendation system 🎮✨.")
+    st.write("On this page, it displays the training and evaluation results of multiple machine learning models 🤖📊 and explore a content-based game recommendation system 🎮✨.")
     st.markdown("### 📊 Overview")
     st.markdown("- **Part 1: Data Analysis and Modeling**")
     st.markdown("  - Includes training and evaluation of models such as Linear Regression, Random Forest, and PCA visualizations.")
@@ -991,48 +991,37 @@ elif page == "Recommendation🎯":
     if st.sidebar.button("🚀 Get Recommendations"):
         recommend_games_rf(selected_genres, selected_developers, selected_publishers)
 
-elif page == "Conclusion🍩":
-    st.title("Conclusion🍩")
+elif page == "Summary🍩":
+    st.title("Summary🍩")
     st.markdown("""
-    This project leverages Steam game data to develop a comprehensive system that integrates data analysis, visualization, and machine learning modeling. Here are the key highlights and outcomes:
-    """)
+    # 🎮 Project Summary: Steam Game Analysis System
 
-    st.markdown("### 📊 Data Analysis and Exploration")
-    st.markdown("""
-    1. **Data Cleaning and Preprocessing**:
-    - Processed datasets from multiple sources, including game descriptions, player ratings, and sales data, to ensure data quality and consistency.
-    - Addressed missing values (e.g., using MICE imputation), handled outliers, and standardized formats for seamless analysis.
-    - Engineered new features like `review_density` and `price_per_hour` to enhance analytical depth.
+    ## 📊 Data Processing and Analysis
 
-    2. **Exploratory Data Analysis (EDA)**:
-    - Interactive visualizations showcased trends in game genres, tags, and ratings, along with the relationship between price and sales.
-    - Word clouds revealed popular themes in game descriptions and tags, providing insights into player preferences and market trends.
-    """)
+    We cleaned and standardized Steam gaming data from multiple sources ✨. The process included fixing missing values and removing outliers 🔍. We created new metrics like review density and price-per-hour 📈.
 
-    st.markdown("### 🤖 Machine Learning Modeling")
-    st.markdown("""
-    1. **Model Evaluation and Comparison**:
-    - Trained and evaluated multiple models (e.g., Linear Regression, Random Forest, and PCA), assessing performance using metrics such as MSE and R².
-    - Conducted feature importance analysis to identify critical factors influencing game ratings and sales.
+    Our analysis revealed key patterns in gaming trends 🎯. Visualizations showed relationships between game prices and sales 💰. Word clouds highlighted popular themes in game descriptions 🔤.
 
-    2. **Recommendation System Development**:
-    - Built a content-based recommendation system combining TF-IDF textual features and game tags to provide personalized game suggestions.
-    - Integrated visualizations of model evaluation and recommendation results to enhance user engagement.
-    """)
+    ## 🤖 Machine Learning Components
 
-    st.markdown("### 🎮 System Features and User Experience")
-    st.markdown("""
-    - **Multi-functional Pages**:
-    - Structured into modules for data display, EDA, modeling, and recommendation system, allowing users to explore and interact dynamically.
-    - **Interactive Interface**:
-    - Enables users to select variables, adjust parameters, and view real-time results, showcasing the power of data-driven analysis.
-    - **Scalability and Practicality**:
-    - Designed to integrate new data effortlessly, ensuring broad applicability and robust functionality.
-    """)
+    Different models analyzed the data 🧮. Linear Regression and Random Forest models predicted game performance 📊. The system identified which features most strongly affected game ratings and sales ⭐.
 
-    st.markdown("### Key Achievements 🚀")
-    st.markdown("""
-    - Identified critical factors contributing to game success, such as tags, pricing strategies, and player ratings.
-    - Demonstrated the potential of data science in enhancing user experience and driving business value through personalized recommendations.
-    - Delivered a complete workflow of data analysis and modeling, highlighting the practical application of data-driven decision-making.
+    The recommendation engine uses game descriptions and tags 🎯. It combines text analysis with game characteristics to suggest titles to players 🎲.
+
+    ## 💻 User Interface and Features
+
+    The system splits into distinct sections ✂️. Users can explore data, view analysis, and get game recommendations 🔍. Each page offers interactive controls 🎛️.
+
+    Users can adjust settings in real-time ⚡. The interface displays immediate results 🖥️. New data integrates smoothly into the system 🔄.
+
+    ## 🌟 Results and Impact 
+
+    The analysis uncovered key success factors for games 🎯. These include:
+    - Effective tag selection 🏷️
+    - Strategic pricing decisions 💰
+    - Strong player rating management ⭐
+
+    The project shows how data science improves gaming experiences 🎮. The system helps make informed decisions about game development and marketing 📈.
+
+    The complete workflow demonstrates practical data analysis in action ⚙️. It offers clear value for both players and game developers 🎯.
     """)
