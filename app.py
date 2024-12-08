@@ -87,7 +87,7 @@ elif page == "Data🌈":
     st.markdown("    - `review_count`: The total number of user reviews for each game.")
     st.markdown("  - **Purpose**: This dataset is essential for understanding how user sentiments and ratings collectively influence a game's perceived quality. It enables the correlation of emotional feedback with quantitative scores.")
     st.markdown("  - **Source**: [Steam Games Reviews and Rankings](https://www.kaggle.com/datasets/mohamedtarek01234/steam-games-reviews-and-rankings)")
-    st.markdow("*Note: It will display the normalized dataset due to the original one may lead the app crash.*")
+    st.markdown("*Note: It will display the normalized dataset due to the original one may lead the app crash.*")
     st.dataframe(steam3.head())
 
     st.markdown("- **Dataset 4 (steam4.csv) 🏷️**:")
