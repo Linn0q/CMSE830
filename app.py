@@ -76,6 +76,7 @@ elif page == "Data🌈":
     st.markdown("    - `copiessold`: The number of copies sold for each game.")
     st.markdown("    - `reviewscore`: The overall user rating for the game.")
     st.markdown("  - **Purpose**: This dataset is instrumental for analyzing how game pricing strategies and sales volumes affect user satisfaction and revenue generation. It also provides a basis for exploring relationships between price, popularity, and reviews.")
+    st.markdown("  - **Source**: [Steam Games Reviews and Rankings](https://www.kaggle.com/datasets/mohamedtarek01234/steam-games-reviews-and-rankings)")
     st.dataframe(steam2.head())
 
     st.markdown("- **Dataset 3 (steam3.csv) ✨**:")
@@ -193,7 +194,6 @@ elif page == "EDA🌷":
     fig1.update_xaxes(title="Number of Reviews")
     fig1.update_yaxes(title="Game Name")
     st.plotly_chart(fig1)
-    st.write("💡")
 
 #2
     st.subheader('Top 10 Game Genr·es/Tags')
@@ -209,7 +209,6 @@ elif page == "EDA🌷":
     fig2 = px.bar(tag_counts[::-1], orientation='h', title='Top 10r Game Genes/Tags')
     fig2.update_layout(yaxis_title='Tags', xaxis_title='Number of Games')
     st.plotly_chart(fig2)
-    st.write("🎮")
 
 #3
     st.subheader('Game Rankings Across Different Genres')
@@ -218,7 +217,6 @@ elif page == "EDA🌷":
     filtered_data = steam4[steam4['genre'] == selected_genre]
     fig3 = px.box(steam4, x='genre', y='rank', title='Game Rankings Across Different Genres')
     st.plotly_chart(fig3)
-    st.write("🎮")
 
 #4
     st.subheader('Top 10 Ranked Games by Genre')
@@ -290,7 +288,6 @@ elif page == "EDA🌷":
     filtered_s1 = s1[s1['publisherclass'].isin(selected_publisher_classes)]
     fig9 = px.scatter(filtered_s1, x='avgplaytime', y='reviewscore', color='publisherclass', title='Avg Playtime vs Review Score by Publisher Class')
     st.plotly_chart(fig9)
-    st.write("1")
 #10
     st.subheader('Price vs Review Score')
     min_price = steam2['price'].min()
@@ -784,7 +781,6 @@ elif page == "Models🏈":
 
 elif page == "Recommendation🎯":
     st.title("Recommendation🎯")
-
     import pandas as pd
     import numpy as np
     import re
@@ -802,6 +798,7 @@ elif page == "Recommendation🎯":
     from imblearn.over_sampling import RandomOverSampler
     import warnings
     warnings.filterwarnings('ignore')
+
     @st.cache_data
     def load_and_clean_data():
         dtypes = {
@@ -858,8 +855,6 @@ elif page == "Recommendation🎯":
                     return pd.NaT
 
         df['release_date'] = df['release_date'].apply(parse_date)
-        
-        # Add the 'description' column here
         df['description'] = df['short_description'].fillna('') + ' ' + df['long_description'].fillna('')
 
         return df
@@ -886,9 +881,6 @@ elif page == "Recommendation🎯":
             'Overwhelmingly Negative': 'Negative'
         }
         df['overall_player_rating'] = df['overall_player_rating'].map(rating_mapping)
-
-        # The 'description' column is already added in clean_data, no need to add it here
-        # df['description'] = df['short_description'].fillna('') + ' ' + df['long_description'].fillna('')
 
         tfidf = TfidfVectorizer(max_features=5000, stop_words='english', ngram_range=(1, 2))
         tfidf.fit(df['description'])
@@ -927,16 +919,16 @@ elif page == "Recommendation🎯":
 
     rf_model_rec, selector_rec, le_rating_rec, tfidf_rec, mlb_genres_rec, mlb_developers_rec, mlb_publishers_rec = feature_engineering_and_train_model(df_rec)
 
-    def recommend_games_rf(genres_list, developer_list, publisher_list):
+    def recommend_games_rf(genres_list, developer, publisher):
         mask = np.ones(len(df_rec), dtype=bool)
         if genres_list:
             genres_mask = df_rec['genres'].apply(lambda x: any(genre in x for genre in genres_list))
             mask = mask & genres_mask
-        if developer_list:
-            dev_mask = df_rec['developer'].apply(lambda x: any(dev in x for dev in developer_list))
+        if developer:
+            dev_mask = df_rec['developer'].apply(lambda x: developer in x)
             mask = mask & dev_mask
-        if publisher_list:
-            pub_mask = df_rec['publisher'].apply(lambda x: any(pub in x for pub in publisher_list))
+        if publisher:
+            pub_mask = df_rec['publisher'].apply(lambda x: publisher in x)
             mask = mask & pub_mask
 
         filtered_df = df_rec[mask]
@@ -977,14 +969,14 @@ elif page == "Recommendation🎯":
                 
     💗 **Select genres you're interested in**
                 
-    💗 **Choose specific developers**
+    💗 **Choose a specific developer**
                 
-    💗 **Pick preferred publishers**
+    💗 **Pick a preferred publisher**
 
     🖱️**Click 'Get Recommendations' to find your perfect games!**
     """)
 
-    st.markdown("**💡Note: Not all publishers and developers have games in any genre, so when your requirements are too detailed, it will return 'No games found with the specified criteria.' Try again! **")
+    st.markdown("💡**Note: Not all publishers and developers have games in any genre, so when your requirements are too detailed, it will return 'No games found with the specified criteria. Please Try again!**")
 
     all_genres = sorted(set([genre for sublist in df_rec['genres'] for genre in sublist]))
     all_developers = sorted(set([dev for sublist in df_rec['developer'] for dev in sublist]))
@@ -992,16 +984,16 @@ elif page == "Recommendation🎯":
 
     st.sidebar.header("🎮 Game Preference Filters")
     selected_genres = st.sidebar.multiselect("Select Genres", all_genres)
-    selected_developers = st.sidebar.multiselect("Select Developers", all_developers)
-    selected_publishers = st.sidebar.multiselect("Select Publishers", all_publishers)
+    selected_developer = st.sidebar.selectbox("Select Developer", [""] + all_developers)
+    selected_publisher = st.sidebar.selectbox("Select Publisher", [""] + all_publishers)
 
     if st.sidebar.button("🚀 Get Recommendations"):
-        recommend_games_rf(selected_genres, selected_developers, selected_publishers)
+        recommend_games_rf(selected_genres, selected_developer if selected_developer else None, selected_publisher if selected_publisher else None)
 
 elif page == "Summary🍩":
     st.title("Summary🍩")
     st.markdown("""
-    # 🎮 Steam Game Analysis System
+    # 🎮 Steam Game Recommendation System
 
     ## 📊 Data Processing and Analysis
 
