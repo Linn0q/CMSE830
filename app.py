@@ -14,9 +14,12 @@ if page == "Welcome🎮":
     st.write("Let's find out with me!")
     st.write("In this project, I aim to dive deep into the data behind games on Steam. I will explore how various factors such as game genre, publisher, and so on correlate with overall game ratings.")
     st.write("My goal is to discover insights that can help both game players and developers understand what drives game popularity, and how emotional engagement reflected in user comments relates to game success.")
-    st.write("And after analysis I hope that I can answer questions that every game players or developer wonders about: ")
+    st.write("After analysis I hope that I can answer questions that every game players or developer wonders about: ")
     st.markdown('*How do player sentiments influence game ratings?*')
     st.markdown('*What makes a great game?*')
+
+    st.markdown('**And users can find games based on their preferences in the Recommendation🎯 System!**')
+
     st.write("")
     st.markdown('- **Page Data🌈** displays all of datasets and the detailed cleaning processing is on my Github.')
     st.markdown('- **Page EDA🌷** displays my EDA (Exploratory Data Analysis) work. Through a series of visualizations, we can find patterns, trends, and insights hidden within the data.')
@@ -84,6 +87,7 @@ elif page == "Data🌈":
     st.markdown("    - `review_count`: The total number of user reviews for each game.")
     st.markdown("  - **Purpose**: This dataset is essential for understanding how user sentiments and ratings collectively influence a game's perceived quality. It enables the correlation of emotional feedback with quantitative scores.")
     st.markdown("  - **Source**: [Steam Games Reviews and Rankings](https://www.kaggle.com/datasets/mohamedtarek01234/steam-games-reviews-and-rankings)")
+    st.markdow("*Note: It will display the normalized dataset due to the original one may lead the app crash.*")
     st.dataframe(steam3.head())
 
     st.markdown("- **Dataset 4 (steam4.csv) 🏷️**:")
@@ -142,6 +146,7 @@ elif page == "Data🌈":
 
 elif page == "EDA🌷":
     st.title("EDA🌷")
+    st.markdown("*Let's explore the data, you can discover the trends, relationships and insights behind the game through interactive visualizations and detailed statistical analyses.*")
     import pandas as pd
     import numpy as np
     import matplotlib.pyplot as plt
@@ -401,7 +406,7 @@ elif page == "Models🏈":
     st.markdown("  - A content-based recommendation system built using advanced feature engineering and model evaluation.")
     st.markdown("### 🔑 Key Features")
     st.markdown("- **Interactive Model Training**: Users can select features and parameters for training.")
-    st.markdown("- **Model Evaluation**: Provides insights into model performance using metrics like MSE, R², and visualizations.")
+    st.markdown("- **Model Evaluation**: Provides insights into model performance using metrics like MSE, R², F1-score and visualizations.")
     st.markdown("- **Recommendation System**: Suggests games based on player preferences and game attributes.")
 
     import pandas as pd
@@ -979,6 +984,8 @@ elif page == "Recommendation🎯":
     🖱️**Click 'Get Recommendations' to find your perfect games!**
     """)
 
+    st.markdown("**💡Note: Not all publishers and developers have games in any genre, so when your requirements are too detailed, it will return 'No games found with the specified criteria.' Try again! **")
+
     all_genres = sorted(set([genre for sublist in df_rec['genres'] for genre in sublist]))
     all_developers = sorted(set([dev for sublist in df_rec['developer'] for dev in sublist]))
     all_publishers = sorted(set([pub for sublist in df_rec['publisher'] for pub in sublist]))
@@ -1000,7 +1007,7 @@ elif page == "Summary🍩":
 
     I cleaned and standardized Steam gaming data from multiple sources ✨. The process included fixing missing values and removing outliers 🔍. I created new metrics like review density and price-per-hour 📈.
 
-    Our analysis revealed key patterns in gaming trends 🎯. Visualizations showed relationships between game prices and sales 💰. Word clouds highlighted popular themes in game descriptions 🔤.
+    My analysis revealed key patterns in gaming trends 🎯. Visualizations showed relationships between game prices and sales 💰. Word clouds highlighted popular themes in game descriptions 🔤.
 
     ## 🤖 Machine Learning Components
 
@@ -1014,7 +1021,7 @@ elif page == "Summary🍩":
 
     Users can adjust settings in real-time ⚡. The interface displays immediate results 🖥️. New data integrates smoothly into the system 🔄.
 
-    **🎮 This project demonstrates how data science can improve the gaming experience 🎮. The system helps make informed decisions about game development and marketing 📈.**
+    **🎮 This project demonstrates how data science can invole the gaming experience 🎮. The system helps make decisions about game development and marketing and give player personal recommondention.📈.**
 
-    **Also, the workflow shows data analytics in action 📈 ⚙️. It provides clear value to players and game developers 🎯.**
+    **Also, the workflow shows data analytics in action 📈 ⚙️. It provides clear views to players and game developers 🎯.**
     """)
