@@ -196,7 +196,7 @@ elif page == "EDA🌷":
     st.plotly_chart(fig1)
 
 #2
-    st.subheader('Top 10 Game Genr·es/Tags')
+    st.subheader('Top 10 Game Genres/Tags')
     s1['tags'] = s1['tags'].fillna('')
     s1['tag_list'] = s1['tags'].str.split(',')
     tags = s1.explode('tag_list')
