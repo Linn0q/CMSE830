@@ -1,6 +1,6 @@
-# CMSE830-Project
-
 # Steam Game Analysis System 🎮
+
+*CMSE830-Project*
 
 ## Overview 🌟
 This Streamlit application analyzes Steam gaming data, providing insights through data visualization, machine learning models, and a recommendation system. The app helps users explore game trends, understand player preferences, and discover new games based on their interests.
